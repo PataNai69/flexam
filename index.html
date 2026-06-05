@@ -29,12 +29,10 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:20px;col
 .btn.qzm{background:#f3e5f5;color:#6a1b9a;border-color:#ce93d8}
 .btn.qzm:hover{background:#e1bee7}
 .btn.qzm.active{background:#6a1b9a;color:#fff;border-color:#6a1b9a}
-/* section tab buttons */
 .tab-btns{display:flex;gap:0;margin-bottom:18px;border-radius:10px;overflow:hidden;border:1.5px solid #c5cae9}
 .tab-btn{flex:1;padding:11px 8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#e8eaf6;color:#3949ab;transition:background .15s}
-.tab-btn:first-child{border-right:1.5px solid #c5cae9}
+.tab-btn:not(:last-child){border-right:1.5px solid #c5cae9}
 .tab-btn.active{background:#1a237e;color:#fff}
-/* section label badge */
 .sec-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
 .sec-clo2{background:#e3f2fd;color:#1565c0}
 .sec-clo3{background:#fce4ec;color:#c62828}
@@ -65,7 +63,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:20px;col
 .mode-banner{padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .mode-banner.prep{background:#fff3e0;color:#e65100;border:1.5px solid #ffb74d}
 .mode-banner.quiz{background:#f3e5f5;color:#6a1b9a;border:1.5px solid #ce93d8}
-.section-divider{background:linear-gradient(135deg,#1a237e,#7986cb);color:#fff;border-radius:10px;padding:14px 18px;margin:20px 0 14px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:10px}
 </style>
 </head>
 <body>
@@ -92,8 +89,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:20px;col
 
 <div class="tab-btns">
   <button class="tab-btn active" id="tab-all" onclick="setTab('all')">📋 All Questions (180)</button>
-  <button class="tab-btn" id="tab-clo2" onclick="setTab('clo2')">🔵 CLO-2 Only (138)</button>
-  <button class="tab-btn" id="tab-clo3" onclick="setTab('clo3')">🔴 CLO-3 Only (42)</button>
+  <button class="tab-btn" id="tab-clo2" onclick="setTab('clo2')">🔵 CLO-2 Only (90)</button>
+  <button class="tab-btn" id="tab-clo3" onclick="setTab('clo3')">🔴 CLO-3 Only (90)</button>
 </div>
 
 <div id="qa"></div>
@@ -197,56 +194,56 @@ const clo2=[{s:"CLO-2",q:"A factory QC engineer slides a 3\u00d73 kernel with st
 {s:"CLO-2",q:"SSD uses multiple feature layers with different resolutions mainly so that the network can",o:["run only on grayscale medical slices", "avoid using non-maximum suppression", "detect objects at several scales using appropriate feature map strides", "train without any labels", "eliminate depthwise separable convolutions"],a:2},
 {s:"CLO-2",q:"Dice loss is sometimes preferred alongside (or instead of) cross-entropy in imbalanced segmentation because",o:["it only applies to bounding boxes", "it guarantees instance IDs", "it requires no predictions", "it removes the need for any decoder", "it directly optimizes overlap-related objectives and can be less dominated by background pixels"],a:4},
 {s:"CLO-2",q:"OpenCV MOG2-style adaptive mixtures often expose a 'detect shadows' flag; when enabled, shadow pixels are typically",o:["always erased from the video file", "converted into optical flow vectors automatically", "used to train YOLO anchors", "mapped to panoptic labels", "labeled differently from true foreground so they are not misclassified as moving objects"],a:4},
-{s:"CLO-2",q:"In DETR-style training, bipartite matching (often Hungarian) between predictions and GT boxes is used mainly to",o:["assign each ground-truth object to exactly one prediction for set-based loss without duplicates", "decode H.264 motion vectors", "estimate background GMM parameters", "replace convolution with sorting", "perform per-pixel softmax"],a:0},
-{s:"CLO-2",q:"A conv layer uses 128 input channels, 256 output channels, kernel 3\u00d73. Bias per output channel. Total parameters equal",o:["3×3×128×256 + 256", "3×128×256", "256 only", "3×3×256 + 256", "128×256 only"],a:0},
-{s:"CLO-2",q:"Stride > 1 without dilation typically",o:["always preserves H×W with any padding", "disables gradients", "downsamples spatial resolution", "inverts convolution", "removes channels"],a:2},
-{s:"CLO-2",q:"Zero-padding 'same' in frameworks usually means",o:["no padding ever", "output is always smaller", "pad equals kernel size always", "pad chosen so output spatial size follows stride/padding rules consistently (often ceil)", "only for 1×1 kernels"],a:3},
-{s:"CLO-2",q:"Leaky ReLU vs ReLU: leaky variants mainly try to",o:["compute softmax", "remove all negatives exactly", "replace convolutions", "normalize batches", "avoid dead neurons for negative inputs"],a:4},
-{s:"CLO-2",q:"Parameter sharing in CNNs implies the same filter",o:["is applied at every spatial location", "cannot be learned", "exists only once total false", "applies only to red channel", "changes per pixel randomly"],a:0},
-{s:"CLO-2",q:"A 7\u00d77 depthwise conv (groups = channels) on 128-channel map: parameters roughly",o:["7×7 only", "128×128", "7×7×128 + 128 biases if used", "128 only", "7×7×128×128"],a:2},
-{s:"CLO-2",q:"Grouped convolution with g groups splits channels so each filter sees",o:["only batch dimension", "one pixel only", "the whole dataset", "C_in/g input channels per group", "all channels always"],a:3},
-{s:"CLO-2",q:"Residual block identity shortcut helps optimization by",o:["forcing output=0", "making the network linear only", "removing nonlinearity always", "allowing layers to learn residual corrections around an identity path", "disabling skip connections"],a:3},
-{s:"CLO-2",q:"Inception-style parallel branches are fused mainly to",o:["combine multi-scale features in one layer", "compute flow", "encode video codec", "remove pooling", "sort detections"],a:0},
-{s:"CLO-2",q:"Label smoothing in classification targets helps",o:["force one-hot to be sharper", "reduce overconfidence / regularize", "remove softmax", "disable augmentation", "increase train error always"],a:1},
-{s:"CLO-2",q:"Mixup augmentation linearly blends images and labels to",o:["replace conv", "remove labels", "encourage smoother decision boundaries between classes", "make images binary only", "compute optical flow"],a:2},
-{s:"CLO-2",q:"Early stopping uses validation performance to",o:["remove test set", "skip optimizer", "set kernel to 0", "always train longer", "halt training before overfitting worsens generalization"],a:4},
-{s:"CLO-2",q:"Weight decay (L2 regularization) in AdamW is often applied",o:["decoupled from the adaptive gradient scaling step", "only at test time", "only to biases never", "to softmax outputs", "to JPEG headers"],a:0},
-{s:"CLO-2",q:"A stem layer in ResNet often uses stride-2 conv to",o:["track objects", "remove channels", "compute masks", "quickly reduce spatial size early", "increase resolution"],a:3},
-{s:"CLO-2",q:"Squeeze-and-Excitation (channel attention) recalibrates",o:["JPEG quality", "spatial positions only", "batch size only", "NMS thresholds", "channel-wise feature responses using global context"],a:4},
-{s:"CLO-2",q:"DataParallel vs ModelParallel: DataParallel mainly splits",o:["kernels across wavelengths", "batch across GPUs; replicated model", "dataset files across CPUs only", "layers across GPUs; single batch shard", "video frames across RAM only"],a:1},
-{s:"CLO-2",q:"Mixed-precision training (fp16/bf16) with loss scaling helps",o:["remove need for optimizer", "speed and memory while maintaining training stability for small gradients", "always increase NaNs", "only inference", "disable convolutions"],a:1},
-{s:"CLO-2",q:"Gradient clipping is used when",o:["segmentation only", "RNN/unstable sequences or large LR risk exploding updates — less common in pure CNN image classifiers but still valid", "NMS fails", "only for k-means", "accuracy is perfect"],a:1},
-{s:"CLO-2",q:"Torch 'channels_first' tensor layout is",o:["C×N×W×H only", "N only", "H×W only", "N×H×W×C always wrong in torch", "N×C×H×W"],a:4},
-{s:"CLO-2",q:"A 2\u00d72 max-pool with stride 2 on 10\u00d710 yields",o:["5×5", "20×20", "9×9", "10×10", "4×4"],a:0},
-{s:"CLO-2",q:"Average pooling before FC compared to flattening huge conv maps mainly",o:["increases FC parameters", "equals max pool always", "removes all spatial info incorrectly stated", "cannot be used in CNNs", "reduces parameters and overfitting risk in the FC layer"],a:4},
-{s:"CLO-2",q:"Spectral bias of deep nets (conceptual): optimization often fits __________ before __________.",o:["low-frequency / smoother patterns; high-frequency fine details", "random labels first", "NMS scores", "high frequency first always universally", "test set first"],a:0},
-{s:"CLO-2",q:"Knowledge distillation trains a student using",o:["k-means centroids", "optical flow only", "JPEG tables", "hard labels only always", "soft targets from a teacher model's logits/temperature"],a:4},
-{s:"CLO-2",q:"Cutout / random erasing augmentations encourage the model to",o:["ignore the object always", "remove validation", "use contextual cues instead of memorizing local textures", "only work on grayscale", "replace labels"],a:2},
-{s:"CLO-2",q:"Stochastic Depth (DropPath) in residual training randomly drops",o:["NMS", "only pooling forever", "whole residual blocks during training for regularization", "dataset rows", "only softmax"],a:2},
-{s:"CLO-2",q:"Fixing random seeds in experiments helps but full reproducibility across GPUs can still differ due to",o:["JPEG", "RGB having three channels", "non-deterministic reductions or cudnn benchmark heuristics", "conv being linear", "always identical on all hardware"],a:2},
-{s:"CLO-2",q:"A security team worries about adversarial stickers on stop signs. CNN vulnerability here relates to",o:["NMS thresholds", "GMM backgrounds", "high-dimensional linear-ish behavior and insufficiently robust features", "U-Net skips", "optical flow smoothness"],a:2},
-{s:"CLO-2",q:"Temporal subsampling of video for classification can miss",o:["batch norm", "all motion always", "fast actions occurring between sampled frames", "RGB entirely", "convolution definition"],a:2},
-{s:"CLO-2",q:"Running mean background fails when illumination changes slowly because",o:["background statistics drift; need adaptive models or learning", "RGB breaks", "motion stops", "NMS needed", "YOLO forbids it"],a:0},
-{s:"CLO-2",q:"Shadows often confuse background subtraction because",o:["they change intensity but not true object occupancy semantics", "they are always ignored by cameras", "they equal optical flow", "they remove edges", "they disable tracking"],a:0},
-{s:"CLO-2",q:"Connected components on a binary motion mask helps to",o:["run Faster R-CNN always", "train ResNet", "decode H.264 manually", "compute softmax over time", "extract candidate blobs for downstream tracking/classification"],a:4},
-{s:"CLO-2",q:"A Kalman state for constant-velocity point model often includes",o:["only HOG", "only class ID", "only mask IoU", "only softmax logits", "position and velocity in each axis"],a:4},
-{s:"CLO-2",q:"Hungarian algorithm in multi-object tracking is used for",o:["computing conv", "semantic segmentation", "optimal bipartite matching between predicted and measured objects", "JPEG", "training YOLO loss"],a:2},
-{s:"CLO-2",q:"IOU matching threshold in trackers trades",o:["precision of association vs tolerance to motion/prediction error", "video codec bitrate", "learning rate", "batch size only", "kernel size only"],a:0},
-{s:"CLO-2",q:"Frame skipping in real-time pipelines reduces compute but",o:["can miss short events", "computes optical flow exact", "removes need for camera", "fixes ID switches always", "always improves accuracy"],a:0},
-{s:"CLO-2",q:"Optical flow brightness constancy is violated strongly when",o:["images are RGB", "specular reflections or sudden lighting changes occur", "objects move slowly", "batch norm runs", "camera is static"],a:1},
-{s:"CLO-2",q:"Coarse-to-fine optical flow pyramids help",o:["only for segmentation", "remove small displacements", "only for audio", "large displacements by estimating flow at smaller resolutions first", "only for kNN"],a:3},
-{s:"CLO-2",q:"Mean-shift tracking updates the window by",o:["solving YOLO regression", "JPEG only", "running Faster R-CNN", "climbing the density gradient of a feature distribution", "sorting pixels"],a:3},
-{s:"CLO-2",q:"Centroid tracking without appearance model drifts when",o:["RGB is 3-channel", "ImageNet pretrained", "NMS runs", "objects are far apart always", "objects overlap and centroids merge"],a:4},
-{s:"CLO-2",q:"Video codecs use inter-frame prediction; for raw CV pipelines compressed streams can",o:["guarantee better labels", "introduce blocking artifacts affecting motion estimation", "eliminate need for pixels", "remove all redundancy perfectly", "replace tracking"],a:1},
-{s:"CLO-2",q:"Rolling shutter cameras distort fast motion because",o:["they forbid CNNs", "they output optical flow", "they remove time", "rows are exposed at different times", "they capture all rows simultaneously always"],a:3},
-{s:"CLO-2",q:"A homography relates two views of a plane; misuse in tracking when scene is non-planar causes",o:["better optical flow always", "perfect alignment always", "YOLO speedup", "model mismatch / poor alignment", "segmentation for free"],a:3},
-{s:"CLO-2",q:"Short-term vs long-term occlusion handling: purely motion prediction without re-ID will",o:["always keep IDs", "train Mask R-CNN", "often lose targets after prolonged occlusion", "remove GMM", "solve segmentation"],a:2},
-{s:"CLO-2",q:"Frame-to-frame SSD/YOLO + SORT pipeline complexity is roughly dominated by",o:["GMM only", "detector forward pass per frame", "JPEG entropy coding only", "k-means on pixels", "U-Net decoder only"],a:1},
-{s:"CLO-2",q:"Temporal smoothing of detection scores can reduce",o:["true positives always", "dataset size", "flickering false positives", "need for any model", "GPU usage to zero"],a:2},
-{s:"CLO-2",q:"Background subtraction learning rate too high causes",o:["optical flow exactness", "foreground objects being absorbed into background quickly", "ResNet convergence proof", "perfect segmentation", "slower adaptation"],a:1},
-{s:"CLO-2",q:"ViBe-style pixel models differ from simple frame diff by",o:["maintaining per-pixel sample-based background models with random update policies", "only using ViT", "only Faster R-CNN", "only using Sobel", "only semantic labels"],a:0},
-{s:"CLO-2",q:"When camera moves, static background assumption fails; typical remedy is",o:["ignore forever", "only classification", "only GMM on raw pixels without compensation", "motion compensation / ego-motion estimation / stabilize or learn background in moving reference", "only instance seg"],a:3}];
-const clo3=[{s:"CLO-3",q:"Contrastive self-supervised pretraining benefits transfer because",o:["it learns invariances useful as generic visual features", "it only clusters filenames", "it guarantees detection mAP=1", "it removes convolutions", "it replaces labels with NMS"],a:0},
+{s:"CLO-2",q:"In DETR-style training, bipartite matching (often Hungarian) between predictions and GT boxes is used mainly to",o:["assign each ground-truth object to exactly one prediction for set-based loss without duplicates", "decode H.264 motion vectors", "estimate background GMM parameters", "replace convolution with sorting", "perform per-pixel softmax"],a:0}];
+const clo3=[{s:"CLO-3",q:"A conv layer uses 128 input channels, 256 output channels, kernel 3\u00d73. Bias per output channel. Total parameters equal",o:["3×3×128×256 + 256", "3×128×256", "256 only", "3×3×256 + 256", "128×256 only"],a:0},
+{s:"CLO-3",q:"Stride > 1 without dilation typically",o:["always preserves H×W with any padding", "disables gradients", "downsamples spatial resolution", "inverts convolution", "removes channels"],a:2},
+{s:"CLO-3",q:"Zero-padding 'same' in frameworks usually means",o:["no padding ever", "output is always smaller", "pad equals kernel size always", "pad chosen so output spatial size follows stride/padding rules consistently (often ceil)", "only for 1×1 kernels"],a:3},
+{s:"CLO-3",q:"Leaky ReLU vs ReLU: leaky variants mainly try to",o:["compute softmax", "remove all negatives exactly", "replace convolutions", "normalize batches", "avoid dead neurons for negative inputs"],a:4},
+{s:"CLO-3",q:"Parameter sharing in CNNs implies the same filter",o:["is applied at every spatial location", "cannot be learned", "exists only once total false", "applies only to red channel", "changes per pixel randomly"],a:0},
+{s:"CLO-3",q:"A 7\u00d77 depthwise conv (groups = channels) on 128-channel map: parameters roughly",o:["7×7 only", "128×128", "7×7×128 + 128 biases if used", "128 only", "7×7×128×128"],a:2},
+{s:"CLO-3",q:"Grouped convolution with g groups splits channels so each filter sees",o:["only batch dimension", "one pixel only", "the whole dataset", "C_in/g input channels per group", "all channels always"],a:3},
+{s:"CLO-3",q:"Residual block identity shortcut helps optimization by",o:["forcing output=0", "making the network linear only", "removing nonlinearity always", "allowing layers to learn residual corrections around an identity path", "disabling skip connections"],a:3},
+{s:"CLO-3",q:"Inception-style parallel branches are fused mainly to",o:["combine multi-scale features in one layer", "compute flow", "encode video codec", "remove pooling", "sort detections"],a:0},
+{s:"CLO-3",q:"Label smoothing in classification targets helps",o:["force one-hot to be sharper", "reduce overconfidence / regularize", "remove softmax", "disable augmentation", "increase train error always"],a:1},
+{s:"CLO-3",q:"Mixup augmentation linearly blends images and labels to",o:["replace conv", "remove labels", "encourage smoother decision boundaries between classes", "make images binary only", "compute optical flow"],a:2},
+{s:"CLO-3",q:"Early stopping uses validation performance to",o:["remove test set", "skip optimizer", "set kernel to 0", "always train longer", "halt training before overfitting worsens generalization"],a:4},
+{s:"CLO-3",q:"Weight decay (L2 regularization) in AdamW is often applied",o:["decoupled from the adaptive gradient scaling step", "only at test time", "only to biases never", "to softmax outputs", "to JPEG headers"],a:0},
+{s:"CLO-3",q:"A stem layer in ResNet often uses stride-2 conv to",o:["track objects", "remove channels", "compute masks", "quickly reduce spatial size early", "increase resolution"],a:3},
+{s:"CLO-3",q:"Squeeze-and-Excitation (channel attention) recalibrates",o:["JPEG quality", "spatial positions only", "batch size only", "NMS thresholds", "channel-wise feature responses using global context"],a:4},
+{s:"CLO-3",q:"DataParallel vs ModelParallel: DataParallel mainly splits",o:["kernels across wavelengths", "batch across GPUs; replicated model", "dataset files across CPUs only", "layers across GPUs; single batch shard", "video frames across RAM only"],a:1},
+{s:"CLO-3",q:"Mixed-precision training (fp16/bf16) with loss scaling helps",o:["remove need for optimizer", "speed and memory while maintaining training stability for small gradients", "always increase NaNs", "only inference", "disable convolutions"],a:1},
+{s:"CLO-3",q:"Gradient clipping is used when",o:["segmentation only", "RNN/unstable sequences or large LR risk exploding updates — less common in pure CNN image classifiers but still valid", "NMS fails", "only for k-means", "accuracy is perfect"],a:1},
+{s:"CLO-3",q:"Torch 'channels_first' tensor layout is",o:["C×N×W×H only", "N only", "H×W only", "N×H×W×C always wrong in torch", "N×C×H×W"],a:4},
+{s:"CLO-3",q:"A 2\u00d72 max-pool with stride 2 on 10\u00d710 yields",o:["5×5", "20×20", "9×9", "10×10", "4×4"],a:0},
+{s:"CLO-3",q:"Average pooling before FC compared to flattening huge conv maps mainly",o:["increases FC parameters", "equals max pool always", "removes all spatial info incorrectly stated", "cannot be used in CNNs", "reduces parameters and overfitting risk in the FC layer"],a:4},
+{s:"CLO-3",q:"Spectral bias of deep nets (conceptual): optimization often fits __________ before __________.",o:["low-frequency / smoother patterns; high-frequency fine details", "random labels first", "NMS scores", "high frequency first always universally", "test set first"],a:0},
+{s:"CLO-3",q:"Knowledge distillation trains a student using",o:["k-means centroids", "optical flow only", "JPEG tables", "hard labels only always", "soft targets from a teacher model's logits/temperature"],a:4},
+{s:"CLO-3",q:"Cutout / random erasing augmentations encourage the model to",o:["ignore the object always", "remove validation", "use contextual cues instead of memorizing local textures", "only work on grayscale", "replace labels"],a:2},
+{s:"CLO-3",q:"Stochastic Depth (DropPath) in residual training randomly drops",o:["NMS", "only pooling forever", "whole residual blocks during training for regularization", "dataset rows", "only softmax"],a:2},
+{s:"CLO-3",q:"Fixing random seeds in experiments helps but full reproducibility across GPUs can still differ due to",o:["JPEG", "RGB having three channels", "non-deterministic reductions or cudnn benchmark heuristics", "conv being linear", "always identical on all hardware"],a:2},
+{s:"CLO-3",q:"A security team worries about adversarial stickers on stop signs. CNN vulnerability here relates to",o:["NMS thresholds", "GMM backgrounds", "high-dimensional linear-ish behavior and insufficiently robust features", "U-Net skips", "optical flow smoothness"],a:2},
+{s:"CLO-3",q:"Temporal subsampling of video for classification can miss",o:["batch norm", "all motion always", "fast actions occurring between sampled frames", "RGB entirely", "convolution definition"],a:2},
+{s:"CLO-3",q:"Running mean background fails when illumination changes slowly because",o:["background statistics drift; need adaptive models or learning", "RGB breaks", "motion stops", "NMS needed", "YOLO forbids it"],a:0},
+{s:"CLO-3",q:"Shadows often confuse background subtraction because",o:["they change intensity but not true object occupancy semantics", "they are always ignored by cameras", "they equal optical flow", "they remove edges", "they disable tracking"],a:0},
+{s:"CLO-3",q:"Connected components on a binary motion mask helps to",o:["run Faster R-CNN always", "train ResNet", "decode H.264 manually", "compute softmax over time", "extract candidate blobs for downstream tracking/classification"],a:4},
+{s:"CLO-3",q:"A Kalman state for constant-velocity point model often includes",o:["only HOG", "only class ID", "only mask IoU", "only softmax logits", "position and velocity in each axis"],a:4},
+{s:"CLO-3",q:"Hungarian algorithm in multi-object tracking is used for",o:["computing conv", "semantic segmentation", "optimal bipartite matching between predicted and measured objects", "JPEG", "training YOLO loss"],a:2},
+{s:"CLO-3",q:"IOU matching threshold in trackers trades",o:["precision of association vs tolerance to motion/prediction error", "video codec bitrate", "learning rate", "batch size only", "kernel size only"],a:0},
+{s:"CLO-3",q:"Frame skipping in real-time pipelines reduces compute but",o:["can miss short events", "computes optical flow exact", "removes need for camera", "fixes ID switches always", "always improves accuracy"],a:0},
+{s:"CLO-3",q:"Optical flow brightness constancy is violated strongly when",o:["images are RGB", "specular reflections or sudden lighting changes occur", "objects move slowly", "batch norm runs", "camera is static"],a:1},
+{s:"CLO-3",q:"Coarse-to-fine optical flow pyramids help",o:["only for segmentation", "remove small displacements", "only for audio", "large displacements by estimating flow at smaller resolutions first", "only for kNN"],a:3},
+{s:"CLO-3",q:"Mean-shift tracking updates the window by",o:["solving YOLO regression", "JPEG only", "running Faster R-CNN", "climbing the density gradient of a feature distribution", "sorting pixels"],a:3},
+{s:"CLO-3",q:"Centroid tracking without appearance model drifts when",o:["RGB is 3-channel", "ImageNet pretrained", "NMS runs", "objects are far apart always", "objects overlap and centroids merge"],a:4},
+{s:"CLO-3",q:"Video codecs use inter-frame prediction; for raw CV pipelines compressed streams can",o:["guarantee better labels", "introduce blocking artifacts affecting motion estimation", "eliminate need for pixels", "remove all redundancy perfectly", "replace tracking"],a:1},
+{s:"CLO-3",q:"Rolling shutter cameras distort fast motion because",o:["they forbid CNNs", "they output optical flow", "they remove time", "rows are exposed at different times", "they capture all rows simultaneously always"],a:3},
+{s:"CLO-3",q:"A homography relates two views of a plane; misuse in tracking when scene is non-planar causes",o:["better optical flow always", "perfect alignment always", "YOLO speedup", "model mismatch / poor alignment", "segmentation for free"],a:3},
+{s:"CLO-3",q:"Short-term vs long-term occlusion handling: purely motion prediction without re-ID will",o:["always keep IDs", "train Mask R-CNN", "often lose targets after prolonged occlusion", "remove GMM", "solve segmentation"],a:2},
+{s:"CLO-3",q:"Frame-to-frame SSD/YOLO + SORT pipeline complexity is roughly dominated by",o:["GMM only", "detector forward pass per frame", "JPEG entropy coding only", "k-means on pixels", "U-Net decoder only"],a:1},
+{s:"CLO-3",q:"Temporal smoothing of detection scores can reduce",o:["true positives always", "dataset size", "flickering false positives", "need for any model", "GPU usage to zero"],a:2},
+{s:"CLO-3",q:"Background subtraction learning rate too high causes",o:["optical flow exactness", "foreground objects being absorbed into background quickly", "ResNet convergence proof", "perfect segmentation", "slower adaptation"],a:1},
+{s:"CLO-3",q:"ViBe-style pixel models differ from simple frame diff by",o:["maintaining per-pixel sample-based background models with random update policies", "only using ViT", "only Faster R-CNN", "only using Sobel", "only semantic labels"],a:0},
+{s:"CLO-3",q:"When camera moves, static background assumption fails; typical remedy is",o:["ignore forever", "only classification", "only GMM on raw pixels without compensation", "motion compensation / ego-motion estimation / stabilize or learn background in moving reference", "only instance seg"],a:3},
+{s:"CLO-3",q:"Contrastive self-supervised pretraining benefits transfer because",o:["it learns invariances useful as generic visual features", "it only clusters filenames", "it guarantees detection mAP=1", "it removes convolutions", "it replaces labels with NMS"],a:0},
 {s:"CLO-3",q:"Test-time augmentation (TTA) for image classification averages predictions across",o:["multiple transformed views of the same image", "NMS thresholds", "different training sets", "anchor boxes only", "video frames only"],a:0},
 {s:"CLO-3",q:"Focal loss modifies CE mainly to address",o:["slow R-CNN proposals", "optical flow brightness", "JPEG artifacts", "easy-example dominance in dense detection training", "GMM drift"],a:3},
 {s:"CLO-3",q:"Feature pyramid networks (FPN) help detectors by",o:["only kNN", "only semantic seg", "combining semantically strong low-res maps with high-res weak maps", "only audio", "removing multi-scale"],a:2},
@@ -317,7 +314,6 @@ function init(){
 function render(){
   const raw=getActive();
   let h='';
-  let lastSec=null;
   raw.forEach((q,i)=>{
     const ans=answered[i];
     const badgeCls=q.s==='CLO-2'?'sec-badge sec-clo2':'sec-badge sec-clo3';
@@ -411,7 +407,6 @@ function resetAll(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// Start in prep mode
 init();
 document.getElementById('prepBtn').classList.add('active');
 document.getElementById('modeBanner').innerHTML='<div class="mode-banner prep">📖 Preparation Mode — All correct answers are highlighted</div>';
