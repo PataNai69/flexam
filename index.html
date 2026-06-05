@@ -30,12 +30,13 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:20px;col
 .btn.qzm:hover{background:#e1bee7}
 .btn.qzm.active{background:#6a1b9a;color:#fff;border-color:#6a1b9a}
 .tab-btns{display:flex;gap:0;margin-bottom:18px;border-radius:10px;overflow:hidden;border:1.5px solid #c5cae9}
-.tab-btn{flex:1;padding:11px 8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#e8eaf6;color:#3949ab;transition:background .15s}
+.tab-btn{flex:1;padding:11px 6px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:#e8eaf6;color:#3949ab;transition:background .15s}
 .tab-btn:not(:last-child){border-right:1.5px solid #c5cae9}
 .tab-btn.active{background:#1a237e;color:#fff}
 .sec-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
 .sec-clo2{background:#e3f2fd;color:#1565c0}
 .sec-clo3{background:#fce4ec;color:#c62828}
+.sec-clo3imp{background:#f3e5f5;color:#6a1b9a}
 .sticky-top{position:sticky;top:0;z-index:100;background:#f0f2f5;padding-bottom:10px}
 .qcard{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .qnum{font-size:11px;font-weight:700;color:#1a237e;margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase}
@@ -57,7 +58,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:20px;col
 .fb.no{background:#ffebee;color:#b71c1c;border-left:4px solid #ef5350}
 .quiz-opt-btn{padding:10px 14px;border-radius:8px;border:1.5px solid #e0e0e0;background:#fafafa;color:#333;font-size:13px;font-weight:400;cursor:pointer;transition:background .12s,border-color .12s;text-align:left;width:100%;display:block;line-height:1.4;margin-bottom:7px}
 .quiz-opt-btn:hover:not(:disabled){background:#e8eaf6;border-color:#9fa8da}
-.quiz-opt-btn.selected{background:#6a1b9a;color:#fff;border-color:#6a1b9a}
 .quiz-opt-btn.result-corr{background:#e8f5e9;color:#1b5e20;border-color:#4caf50}
 .quiz-opt-btn.result-wrng{background:#ffebee;color:#b71c1c;border-color:#ef5350}
 .mode-banner{padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
@@ -88,9 +88,10 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:20px;col
 </div>
 
 <div class="tab-btns">
-  <button class="tab-btn active" id="tab-all" onclick="setTab('all')">📋 All Questions (180)</button>
-  <button class="tab-btn" id="tab-clo2" onclick="setTab('clo2')">🔵 CLO-2 Only (90)</button>
-  <button class="tab-btn" id="tab-clo3" onclick="setTab('clo3')">🔴 CLO-3 Only (90)</button>
+  <button class="tab-btn active" id="tab-all" onclick="setTab('all')">📋 All (180)</button>
+  <button class="tab-btn" id="tab-clo2" onclick="setTab('clo2')">🔵 CLO-2 (90)</button>
+  <button class="tab-btn" id="tab-clo3" onclick="setTab('clo3')">🔴 CLO-3 (48)</button>
+  <button class="tab-btn" id="tab-clo3imp" onclick="setTab('clo3imp')">🟣 CLO-3 IMP (42)</button>
 </div>
 
 <div id="qa"></div>
@@ -242,61 +243,62 @@ const clo3=[{s:"CLO-3",q:"A conv layer uses 128 input channels, 256 output chann
 {s:"CLO-3",q:"Temporal smoothing of detection scores can reduce",o:["true positives always", "dataset size", "flickering false positives", "need for any model", "GPU usage to zero"],a:2},
 {s:"CLO-3",q:"Background subtraction learning rate too high causes",o:["optical flow exactness", "foreground objects being absorbed into background quickly", "ResNet convergence proof", "perfect segmentation", "slower adaptation"],a:1},
 {s:"CLO-3",q:"ViBe-style pixel models differ from simple frame diff by",o:["maintaining per-pixel sample-based background models with random update policies", "only using ViT", "only Faster R-CNN", "only using Sobel", "only semantic labels"],a:0},
-{s:"CLO-3",q:"When camera moves, static background assumption fails; typical remedy is",o:["ignore forever", "only classification", "only GMM on raw pixels without compensation", "motion compensation / ego-motion estimation / stabilize or learn background in moving reference", "only instance seg"],a:3},
-{s:"CLO-3",q:"Contrastive self-supervised pretraining benefits transfer because",o:["it learns invariances useful as generic visual features", "it only clusters filenames", "it guarantees detection mAP=1", "it removes convolutions", "it replaces labels with NMS"],a:0},
-{s:"CLO-3",q:"Test-time augmentation (TTA) for image classification averages predictions across",o:["multiple transformed views of the same image", "NMS thresholds", "different training sets", "anchor boxes only", "video frames only"],a:0},
-{s:"CLO-3",q:"Focal loss modifies CE mainly to address",o:["slow R-CNN proposals", "optical flow brightness", "JPEG artifacts", "easy-example dominance in dense detection training", "GMM drift"],a:3},
-{s:"CLO-3",q:"Feature pyramid networks (FPN) help detectors by",o:["only kNN", "only semantic seg", "combining semantically strong low-res maps with high-res weak maps", "only audio", "removing multi-scale"],a:2},
-{s:"CLO-3",q:"Deformable convolution learns",o:["optical flow ground truth", "GMM parameters always", "JPEG tables", "sampling offsets for convolution positions", "only 1×1 masks"],a:3},
-{s:"CLO-3",q:"Soft-NMS decays scores of overlapping boxes instead of hard deletion to",o:["replace IoU", "train backbone only", "reduce sensitivity to exact ordering / keep more true positives", "always increase FP", "compute flow"],a:2},
-{s:"CLO-3",q:"DETR-style set prediction removes hand-crafted anchors by using",o:["only U-Net", "transformer queries + bipartite matching loss", "only HOG", "only GMM", "only sliding windows on pixels"],a:1},
-{s:"CLO-3",q:"ROI Align improves ROI Pool by",o:["adding JPEG", "bilinear sampling at continuous locations to avoid quantization misalignment", "removing interpolation", "forcing stride 0", "using only max on integers always worse statement"],a:1},
-{s:"CLO-3",q:"Mask scoring in Mask R-CNN is trained with",o:["only box regression on full image", "only optical flow loss", "per-pixel sigmoid BCE style losses on positive ROIs", "softmax over boxes only", "k-means loss"],a:2},
-{s:"CLO-3",q:"DeepLab atrous spatial pyramid pooling (ASPP) aims to",o:["remove context", "only detect faces", "only compress video", "capture multi-scale context using parallel dilated convolutions", "only track with Kalman"],a:3},
-{s:"CLO-3",q:"Boundary loss / contour refinement in segmentation targets",o:["crisp object borders where class transitions occur", "only image-level accuracy", "only JPEG", "only NMS", "only GMM"],a:0},
-{s:"CLO-3",q:"Trilinear upsampling in 3D medical volumes is used because",o:["only for sorting", "only for audio", "voxels have three spatial dimensions requiring 3D interpolation", "CNNs cannot use 2D", "videos are 1D"],a:2},
-{s:"CLO-3",q:"Temporal convolutional networks (TCN) over per-frame CNN features use",o:["only Apriori", "causal dilated convolutions across time", "only GMM", "only JPEG", "only R-CNN per frame without time"],a:1},
-{s:"CLO-3",q:"Contrastive video pretraining might use",o:["temporally nearby patches/clips as positives", "only optical flow GT", "only NMS", "only ImageNet labels", "only negative pairs always"],a:0},
-{s:"CLO-3",q:"SlowFast networks use",o:["only SSD", "only Mask R-CNN", "a low-frame-rate high-capacity pathway + a high-frame-rate lightweight pathway", "only GMM", "two identical full networks at same fps always"],a:2},
-{s:"CLO-3",q:"Trajectory LSTM on detection features helps by",o:["only semantic seg", "removing time", "only JPEG", "modeling temporal dependencies of each track's appearance/motion", "replacing conv"],a:3},
-{s:"CLO-3",q:"Graph neural networks on tracklets can represent",o:["only pixels independent", "only softmax", "only HOG", "objects as nodes and interactions/edges across time-space", "only DBSCAN on filenames"],a:3},
-{s:"CLO-3",q:"Transformer trackers represent search relation using",o:["only GMM", "only mean shift", "only kNN on RGB", "only Sobel", "attention between template and search token embeddings"],a:4},
-{s:"CLO-3",q:"Optical flow as supervision for representation learning can provide",o:["anchor boxes", "instance masks always", "pseudo-labels for motion-aware features", "class labels always", "JPEG headers"],a:2},
-{s:"CLO-3",q:"Self-supervised depth from monocular video often exploits",o:["R-CNN proposals only", "NMS only", "GMM only", "photometric consistency between views with estimated pose", "U-Net only on text"],a:3},
-{s:"CLO-3",q:"Multi-task learning detection + segmentation can share",o:["only Kalman", "only k-means", "only JPEG decoder", "nothing ever", "a backbone with task-specific heads"],a:4},
-{s:"CLO-3",q:"Hard negative mining in older detectors referred to",o:["ROI Align offsets", "optical flow pyramids", "training more on misclassified background patches", "GMM update rates", "mining bitcoin"],a:2},
-{s:"CLO-3",q:"OHEM (Online Hard Example Mining) selects",o:["random easy patches only", "only anchors with IoU=0 always", "only cluster centers", "only flow vectors", "high-loss examples within a batch for training focus"],a:4},
-{s:"CLO-3",q:"Balanced sampling in detection datasets addresses",o:["long-tail class frequency mismatch", "optical flow smoothness only", "JPEG compression", "batch norm mean", "kernel symmetry"],a:0},
-{s:"CLO-3",q:"Copy-paste augmentation for instance segmentation",o:["only for audio", "pastes objects onto new backgrounds with mask-aware blending", "only for GMM", "only for sorting", "deletes masks"],a:1},
-{s:"CLO-3",q:"Point-based instance segmentation (e.g., PointRend idea) refines",o:["only optical flow", "only full-image softmax", "uncertain boundary points rather than all pixels equally", "only center pixels", "only YOLO grid"],a:2},
-{s:"CLO-3",q:"Neural architecture search for detectors trades",o:["always human design out", "only kNN", "compute for discovery of efficient modules", "only NMS sort", "only JPEG"],a:2},
-{s:"CLO-3",q:"Quantization-aware training helps INT8 deployment by",o:["removing conv", "simulating low-precision arithmetic during training", "only GMM", "only optical flow", "only increasing model size"],a:1},
-{s:"CLO-3",q:"Knowledge distillation from a heavy detector to a light one can transfer",o:["softened class distributions and sometimes intermediate features", "only JPEG tables", "only filenames", "only NMS thresholds", "only Kalman noise"],a:0},
-{s:"CLO-3",q:"Open-vocabulary detection leverages",o:["text-image aligned embeddings (e.g., CLIP-like) to generalize beyond closed set", "only GMM", "only U-Net 2015 only", "only HOG", "only Sobel"],a:0},
-{s:"CLO-3",q:"Video instance segmentation requires",o:["only per-frame semantic labels", "only optical flow visualization", "only bounding boxes without time", "consistent object masks across time (IDs)", "only classification"],a:3},
-{s:"CLO-3",q:"STCN (space-time correspondences) style propagation uses",o:["only Faster R-CNN boxes", "memory of past frames to refine masks", "only k-means", "only GMM", "only JPEG"],a:1},
-{s:"CLO-3",q:"Contrastive patch matching across frames encourages",o:["invariance to appearance changes while preserving correspondence", "only anchor offsets", "random predictions", "only softmax on classes", "only NMS"],a:0},
-{s:"CLO-3",q:"When deploying YOLO on edge, INT8 quantization may hurt small objects because",o:["RGB breaks", "NMS disappears", "stride becomes 0", "quantization error affects low-magnitude activations/ fine features", "INT8 always improves small objects"],a:3},
-{s:"CLO-3",q:"Temporal ensemble of models (different checkpoints) at inference can",o:["always hurt accuracy", "replace training", "reduce variance / stabilize predictions at extra compute", "only for JPEG", "only for GMM"],a:2},
-{s:"CLO-3",q:"Active learning for segmentation prioritizes labeling",o:["only detection NMS outputs", "uncertain / high-entropy regions", "random 1 pixel", "only ImageNet", "only center crop"],a:1},
-{s:"CLO-3",q:"Synthetic data for detection/seg is useful but risks",o:["making NMS illegal", "removing conv", "removing need for real data always", "perfect realism always", "sim-to-real domain gap"],a:4},
-{s:"CLO-3",q:"Differentiable rendering bridges 3D objects to 2D by",o:["only JPEG", "enabling gradients through projection/rasterization approximations", "only kNN", "only GMM", "forbidding gradients"],a:1},
-{s:"CLO-3",q:"NeRF novel view synthesis optimizes",o:["NMS only", "GMM background only", "YOLO grid only", "a continuous radiance field per scene — related 3D vision trend", "U-Net only on audio"],a:3},
-{s:"CLO-3",q:"Multi-frame attention for video recognition aggregates",o:["only one frame always", "only JPEG", "only Sobel", "tokens across time to relate long-range dependencies", "only optical flow vectors without appearance"],a:3},
-{s:"CLO-3",q:"Contrastive language-image pretraining helps zero-shot classification because",o:["text removes images", "GMM clusters words", "NMS provides language", "CNN cannot embed", "text and image live in a shared embedding space"],a:4},
-{s:"CLO-3",q:"Explainability hooks on CNNs (Grad-CAM) localize",o:["exact causal physical reasoning guaranteed", "NMS boxes only", "Kalman covariances only", "regions contributing to a class decision via gradient-weighted maps", "JPEG blocks only"],a:3}];
+{s:"CLO-3",q:"When camera moves, static background assumption fails; typical remedy is",o:["ignore forever", "only classification", "only GMM on raw pixels without compensation", "motion compensation / ego-motion estimation / stabilize or learn background in moving reference", "only instance seg"],a:3}];
+const clo3imp=[{s:"CLO-3 IMP",q:"Contrastive self-supervised pretraining benefits transfer because",o:["it learns invariances useful as generic visual features", "it only clusters filenames", "it guarantees detection mAP=1", "it removes convolutions", "it replaces labels with NMS"],a:0},
+{s:"CLO-3 IMP",q:"Test-time augmentation (TTA) for image classification averages predictions across",o:["multiple transformed views of the same image", "NMS thresholds", "different training sets", "anchor boxes only", "video frames only"],a:0},
+{s:"CLO-3 IMP",q:"Focal loss modifies CE mainly to address",o:["slow R-CNN proposals", "optical flow brightness", "JPEG artifacts", "easy-example dominance in dense detection training", "GMM drift"],a:3},
+{s:"CLO-3 IMP",q:"Feature pyramid networks (FPN) help detectors by",o:["only kNN", "only semantic seg", "combining semantically strong low-res maps with high-res weak maps", "only audio", "removing multi-scale"],a:2},
+{s:"CLO-3 IMP",q:"Deformable convolution learns",o:["optical flow ground truth", "GMM parameters always", "JPEG tables", "sampling offsets for convolution positions", "only 1×1 masks"],a:3},
+{s:"CLO-3 IMP",q:"Soft-NMS decays scores of overlapping boxes instead of hard deletion to",o:["replace IoU", "train backbone only", "reduce sensitivity to exact ordering / keep more true positives", "always increase FP", "compute flow"],a:2},
+{s:"CLO-3 IMP",q:"DETR-style set prediction removes hand-crafted anchors by using",o:["only U-Net", "transformer queries + bipartite matching loss", "only HOG", "only GMM", "only sliding windows on pixels"],a:1},
+{s:"CLO-3 IMP",q:"ROI Align improves ROI Pool by",o:["adding JPEG", "bilinear sampling at continuous locations to avoid quantization misalignment", "removing interpolation", "forcing stride 0", "using only max on integers always worse statement"],a:1},
+{s:"CLO-3 IMP",q:"Mask scoring in Mask R-CNN is trained with",o:["only box regression on full image", "only optical flow loss", "per-pixel sigmoid BCE style losses on positive ROIs", "softmax over boxes only", "k-means loss"],a:2},
+{s:"CLO-3 IMP",q:"DeepLab atrous spatial pyramid pooling (ASPP) aims to",o:["remove context", "only detect faces", "only compress video", "capture multi-scale context using parallel dilated convolutions", "only track with Kalman"],a:3},
+{s:"CLO-3 IMP",q:"Boundary loss / contour refinement in segmentation targets",o:["crisp object borders where class transitions occur", "only image-level accuracy", "only JPEG", "only NMS", "only GMM"],a:0},
+{s:"CLO-3 IMP",q:"Trilinear upsampling in 3D medical volumes is used because",o:["only for sorting", "only for audio", "voxels have three spatial dimensions requiring 3D interpolation", "CNNs cannot use 2D", "videos are 1D"],a:2},
+{s:"CLO-3 IMP",q:"Temporal convolutional networks (TCN) over per-frame CNN features use",o:["only Apriori", "causal dilated convolutions across time", "only GMM", "only JPEG", "only R-CNN per frame without time"],a:1},
+{s:"CLO-3 IMP",q:"Contrastive video pretraining might use",o:["temporally nearby patches/clips as positives", "only optical flow GT", "only NMS", "only ImageNet labels", "only negative pairs always"],a:0},
+{s:"CLO-3 IMP",q:"SlowFast networks use",o:["only SSD", "only Mask R-CNN", "a low-frame-rate high-capacity pathway + a high-frame-rate lightweight pathway", "only GMM", "two identical full networks at same fps always"],a:2},
+{s:"CLO-3 IMP",q:"Trajectory LSTM on detection features helps by",o:["only semantic seg", "removing time", "only JPEG", "modeling temporal dependencies of each track's appearance/motion", "replacing conv"],a:3},
+{s:"CLO-3 IMP",q:"Graph neural networks on tracklets can represent",o:["only pixels independent", "only softmax", "only HOG", "objects as nodes and interactions/edges across time-space", "only DBSCAN on filenames"],a:3},
+{s:"CLO-3 IMP",q:"Transformer trackers represent search relation using",o:["only GMM", "only mean shift", "only kNN on RGB", "only Sobel", "attention between template and search token embeddings"],a:4},
+{s:"CLO-3 IMP",q:"Optical flow as supervision for representation learning can provide",o:["anchor boxes", "instance masks always", "pseudo-labels for motion-aware features", "class labels always", "JPEG headers"],a:2},
+{s:"CLO-3 IMP",q:"Self-supervised depth from monocular video often exploits",o:["R-CNN proposals only", "NMS only", "GMM only", "photometric consistency between views with estimated pose", "U-Net only on text"],a:3},
+{s:"CLO-3 IMP",q:"Multi-task learning detection + segmentation can share",o:["only Kalman", "only k-means", "only JPEG decoder", "nothing ever", "a backbone with task-specific heads"],a:4},
+{s:"CLO-3 IMP",q:"Hard negative mining in older detectors referred to",o:["ROI Align offsets", "optical flow pyramids", "training more on misclassified background patches", "GMM update rates", "mining bitcoin"],a:2},
+{s:"CLO-3 IMP",q:"OHEM (Online Hard Example Mining) selects",o:["random easy patches only", "only anchors with IoU=0 always", "only cluster centers", "only flow vectors", "high-loss examples within a batch for training focus"],a:4},
+{s:"CLO-3 IMP",q:"Balanced sampling in detection datasets addresses",o:["long-tail class frequency mismatch", "optical flow smoothness only", "JPEG compression", "batch norm mean", "kernel symmetry"],a:0},
+{s:"CLO-3 IMP",q:"Copy-paste augmentation for instance segmentation",o:["only for audio", "pastes objects onto new backgrounds with mask-aware blending", "only for GMM", "only for sorting", "deletes masks"],a:1},
+{s:"CLO-3 IMP",q:"Point-based instance segmentation (e.g., PointRend idea) refines",o:["only optical flow", "only full-image softmax", "uncertain boundary points rather than all pixels equally", "only center pixels", "only YOLO grid"],a:2},
+{s:"CLO-3 IMP",q:"Neural architecture search for detectors trades",o:["always human design out", "only kNN", "compute for discovery of efficient modules", "only NMS sort", "only JPEG"],a:2},
+{s:"CLO-3 IMP",q:"Quantization-aware training helps INT8 deployment by",o:["removing conv", "simulating low-precision arithmetic during training", "only GMM", "only optical flow", "only increasing model size"],a:1},
+{s:"CLO-3 IMP",q:"Knowledge distillation from a heavy detector to a light one can transfer",o:["softened class distributions and sometimes intermediate features", "only JPEG tables", "only filenames", "only NMS thresholds", "only Kalman noise"],a:0},
+{s:"CLO-3 IMP",q:"Open-vocabulary detection leverages",o:["text-image aligned embeddings (e.g., CLIP-like) to generalize beyond closed set", "only GMM", "only U-Net 2015 only", "only HOG", "only Sobel"],a:0},
+{s:"CLO-3 IMP",q:"Video instance segmentation requires",o:["only per-frame semantic labels", "only optical flow visualization", "only bounding boxes without time", "consistent object masks across time (IDs)", "only classification"],a:3},
+{s:"CLO-3 IMP",q:"STCN (space-time correspondences) style propagation uses",o:["only Faster R-CNN boxes", "memory of past frames to refine masks", "only k-means", "only GMM", "only JPEG"],a:1},
+{s:"CLO-3 IMP",q:"Contrastive patch matching across frames encourages",o:["invariance to appearance changes while preserving correspondence", "only anchor offsets", "random predictions", "only softmax on classes", "only NMS"],a:0},
+{s:"CLO-3 IMP",q:"When deploying YOLO on edge, INT8 quantization may hurt small objects because",o:["RGB breaks", "NMS disappears", "stride becomes 0", "quantization error affects low-magnitude activations/ fine features", "INT8 always improves small objects"],a:3},
+{s:"CLO-3 IMP",q:"Temporal ensemble of models (different checkpoints) at inference can",o:["always hurt accuracy", "replace training", "reduce variance / stabilize predictions at extra compute", "only for JPEG", "only for GMM"],a:2},
+{s:"CLO-3 IMP",q:"Active learning for segmentation prioritizes labeling",o:["only detection NMS outputs", "uncertain / high-entropy regions", "random 1 pixel", "only ImageNet", "only center crop"],a:1},
+{s:"CLO-3 IMP",q:"Synthetic data for detection/seg is useful but risks",o:["making NMS illegal", "removing conv", "removing need for real data always", "perfect realism always", "sim-to-real domain gap"],a:4},
+{s:"CLO-3 IMP",q:"Differentiable rendering bridges 3D objects to 2D by",o:["only JPEG", "enabling gradients through projection/rasterization approximations", "only kNN", "only GMM", "forbidding gradients"],a:1},
+{s:"CLO-3 IMP",q:"NeRF novel view synthesis optimizes",o:["NMS only", "GMM background only", "YOLO grid only", "a continuous radiance field per scene — related 3D vision trend", "U-Net only on audio"],a:3},
+{s:"CLO-3 IMP",q:"Multi-frame attention for video recognition aggregates",o:["only one frame always", "only JPEG", "only Sobel", "tokens across time to relate long-range dependencies", "only optical flow vectors without appearance"],a:3},
+{s:"CLO-3 IMP",q:"Contrastive language-image pretraining helps zero-shot classification because",o:["text removes images", "GMM clusters words", "NMS provides language", "CNN cannot embed", "text and image live in a shared embedding space"],a:4},
+{s:"CLO-3 IMP",q:"Explainability hooks on CNNs (Grad-CAM) localize",o:["exact causal physical reasoning guaranteed", "NMS boxes only", "Kalman covariances only", "regions contributing to a class decision via gradient-weighted maps", "JPEG blocks only"],a:3}];
 
 function getActive(){
   if(activeTab==='clo2') return clo2;
   if(activeTab==='clo3') return clo3;
-  return [...clo2,...clo3];
+  if(activeTab==='clo3imp') return clo3imp;
+  return [...clo2,...clo3,...clo3imp];
 }
 
 function setTab(t){
   activeTab=t;
-  document.getElementById('tab-all').className='tab-btn'+(t==='all'?' active':'');
-  document.getElementById('tab-clo2').className='tab-btn'+(t==='clo2'?' active':'');
-  document.getElementById('tab-clo3').className='tab-btn'+(t==='clo3'?' active':'');
+  ['all','clo2','clo3','clo3imp'].forEach(id=>{
+    document.getElementById('tab-'+id).className='tab-btn'+(t===id?' active':'');
+  });
   init();
   render();
   window.scrollTo({top:0,behavior:'smooth'});
@@ -316,13 +318,15 @@ function render(){
   let h='';
   raw.forEach((q,i)=>{
     const ans=answered[i];
-    const badgeCls=q.s==='CLO-2'?'sec-badge sec-clo2':'sec-badge sec-clo3';
+    let badgeCls='sec-badge ';
+    if(q.s==='CLO-2') badgeCls+='sec-clo2';
+    else if(q.s==='CLO-3 IMP') badgeCls+='sec-clo3imp';
+    else badgeCls+='sec-clo3';
     h+=`<div class="qcard" id="qc${i}">`;
     h+=`<span class="${badgeCls}">${q.s}</span>`;
     h+=`<div class="qnum">Question ${i+1} / ${raw.length}</div>`;
     h+=`<div class="qtxt">${q.q}</div>`;
     h+=`<div class="opts">`;
-
     if(quizMode){
       const chk=quizChecked[i];
       const sel=quizSelections[i];
